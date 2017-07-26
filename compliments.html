@@ -1,0 +1,43 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Write a complement</h1>
+    <input>
+    <button>Submit</button>
+
+    <script src="https://www.gstatic.com/firebasejs/4.1.5/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCMIrxz12pg8WJz8NhM6RqMgBr1aGnDEM4",
+        authDomain: "compliments-73fb6.firebaseapp.com",
+        databaseURL: "https://compliments-73fb6.firebaseio.com",
+        projectId: "compliments-73fb6",
+        storageBucket: "compliments-73fb6.appspot.com",
+        messagingSenderId: "567022977230"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+    <script>
+        var compliment = document.querySelector("h1");
+        var message = document.querySelector("input");
+        var button = document.querySelector("button");
+
+        var database = firebase.database();
+        var reference = database.ref();
+
+        button.onclick = function() {
+          reference.set(message.value);
+
+
+        }
+
+        reference.on("value", function(snapshot){
+          compliment.innerHTML = snapshot.val();
+        });
+        compliment.innnerHTML = "Write two complements";
+    </script>
+  </body>
+</html>
